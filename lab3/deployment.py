@@ -31,5 +31,6 @@ DATABASES = {
         'HOST': "hotelbooking-server.mysql.database.azure.com",
         'USER': "rootShelep@hotelbooking-server",
         'PASSWORD': "pass@1324",
+        'PORT': '3306',
     }
 }
