@@ -4,19 +4,19 @@ from django.urls import path, include
 from hotel_booking import views, views_plotly, views_bokeh
 
 router = routers.DefaultRouter()
-router.register(r'api/customers', views.CustomerAPI)
-router.register(r'api/room_types', views.RoomTypeAPI)
-router.register(r'api/room', views.RoomAPI)
-router.register(r'api/bookings', views.BookingAPI)
-router.register(r'api/services', views.ServiceAPI)
-router.register(r'api/payments', views.PaymentAPI)
-router.register(r'api/booking_services', views.BookingServiceAPI)
+router.register(r'customers', views.CustomerAPI)
+router.register(r'room_types', views.RoomTypeAPI)
+router.register(r'room', views.RoomAPI)
+router.register(r'bookings', views.BookingAPI)
+router.register(r'services', views.ServiceAPI)
+router.register(r'payments', views.PaymentAPI)
+router.register(r'booking_services', views.BookingServiceAPI)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
-    path('home/', views.home, name='home'),
+    path('', views.home, name='home'),
 
     path('customers/add/', views.add_customer, name='add_customer'),
     path('customers/', views.list_customers, name='list_customers'),
