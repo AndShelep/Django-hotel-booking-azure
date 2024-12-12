@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Booking</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/get_form.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Booking</h1>
+        <h1>Enter Booking ID</h1>
+        <form name="id" method="post" action="{% url 'get_booking' %}">
+            {% csrf_token %}
+            <label for="tid"></label>
+            <input type="number" name="tid" id="tid" required>
+            <input type="submit" value="Find Booking">
+        </form>
+        
+        {% if booking %}
+            <div class="result">
+                <p><strong>ID:</strong> {{ booking.id }}</p>
+                <p><b>Room:</b></p>
+                <ul>
+                    <li><p><strong>Number:</strong> {{ booking.room.room_number }}</p></li>
+                    <li><p><strong>Type:</strong> {{ booking.room.room_type.room_type }}</p></li>
+                    <li><p><strong>Description:</strong> {{ booking.room.room_type.room_type_description }}</p></li>
+                </ul>
+                <p><b>Customer:</b></p>
+                <ul>
+                    <li><p><strong>Name:</strong> {{ booking.customer.customer_name }}</p></li>
+                    <li><p><strong>Surname:</strong> {{ booking.customer.customer_surname }}</p></li>
+                    <li><p><strong>Phone Number:</strong> {{ booking.customer.phone_number }}</p></li>
+                    <li><p><strong>Email:</strong> {{ booking.customer.customer_email }}</p></li>
+                </ul>
+                <p><b>Date:</b></p>
+                <ul>
+                    <li><p><strong>In date:</strong> {{ booking.in_date }}</p></li>
+                    <li><p><strong>Out date:</strong> {{ booking.out_date }}</p></li>
+                </ul>
+                <p><b>Services:</b></p>
+                <ul>
+                    {% for service in booking.services %}
+                        <li><p><strong>Name:</strong> {{ service.service_name }}</p></li>
+                        <li><p><strong>Description:</strong> {{ service.service_description }}</p></li>
+                        <li><p><strong>Price:</strong> {{ service.price }}</p></li>
+                    {% empty %}
+                        <li>No services booked</li>
+                    {% endfor %}
+                </ul>
+                <p><strong>Total price:</strong> {{ booking.total_price }}</p>
+            </div>
+        {% else %}
+            <p class="empty-message">No bookings found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

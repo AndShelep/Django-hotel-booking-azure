@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Service</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/add_form.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add Service</h1>
+        <form name="register" method="post" action="{% url 'add_service' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Service Name:</label>
+                <input type="text" name="tname" required>
+            </div>
+            <div class="form-group">
+                <label>Description:</label>
+                <input type="text" name="tdescription" required>
+            </div>
+            <div class="form-group">
+                <label>Price:</label>
+                <input type="text" name="tprice" required>
+            </div>
+            <button type="submit" class="submit-button">Click to Register</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Booking</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/add_form.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% if error_message %}
+            <div class="alert alert-danger">
+                {{ error_message }}
+            </div>
+        {% endif %}
+        <h1>Add Booking</h1>
+        <form name="register" method="post" action="{% url 'add_booking' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="room_number">Room:</label>
+                <select name="troom_number" id="room_number">
+                    {% for room in rooms %}
+                        <option value="{{ room.room_number }}">{{ room.room_number }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Customer Name:</label>
+                <input type="text" name="tname" required>
+            </div>
+            <div class="form-group">
+                <label>Customer Surname:</label>
+                <input type="text" name="tsurname" required>
+            </div>
+            <div class="form-group">
+                <label>Customer Phone Number:</label>
+                <input type="number" name="tphone_number" required>
+            </div>
+            <div class="form-group">
+                <label>In Date:</label>
+                <input type="date" name="tin_date" required>
+            </div>
+            <div class="form-group">
+                <label>Out Date:</label>
+                <input type="date" name="tout_date" required>
+            </div>
+            <div class="form-group">
+                <label>Services:</label>
+                {% for service in services %}
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="tservices" value="{{ service.id }}"> {{ service.service_name }}
+                    </label>
+                {% endfor %}
+            </div>
+            <button type="submit" class="submit-button">Click to Register</button>
+        </form>
+    </div>
+</body>
+</html>

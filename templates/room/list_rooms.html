@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/list_form.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Room List</h1>
+
+        {% for room in rooms %}
+            <div class="list-item">
+                <p><strong>Number:</strong> {{ room.room_number }}</p>
+                <p><strong>Type:</strong> {{ room.room_type.room_type }}</p>
+                <p><strong>Price per night:</strong> {{ room.price_per_night }}</p>
+                <div class="action-buttons">
+                    <a href="{% url 'update_room' room.room_number %}">
+                        <button style="padding: 10px 15px; font-size: 14px; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px; background-color: #4CAF50; color: white; transition: background-color 0.3s ease;" 
+                                onmouseover="this.style.backgroundColor='#45a049'" 
+                                onmouseout="this.style.backgroundColor='#4CAF50'">
+                            Update
+                        </button>
+                    </a>
+                </div>
+            </div>
+        {% empty %}
+            <p class="empty-message">No rooms found.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

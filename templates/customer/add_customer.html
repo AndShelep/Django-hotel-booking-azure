@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Customer</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/add_form.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add customer</h1>
+    
+        {% if error_message %}
+            <div class="error-message" style="color: red; font-weight: bold;">
+                {{ error_message }}
+            </div>
+        {% endif %}
+
+        <form name="register" method="post" action="{% url 'add_customer' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Surname:</label>
+                <input type="text" name="surname" required>
+            </div>
+            <div class="form-group">
+                <label>Phone:</label>
+                <input type="text" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" name="email" required>
+            </div>
+            <button type="submit" class="submit-button">Click to add</button>
+        </form>
+    </div>
+</body>
+</html>

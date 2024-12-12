@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/list_form.css' %}">
+    <script>
+        function confirmDelete(serviceId) {
+            if (confirm("Are you sure you want to delete this service?")) {
+                document.getElementById(`delete-form-${serviceId}`).submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Service List</h1>
+
+        {% for service in services %}
+            <div class="list-item">
+                <p><strong>ID:</strong> {{ service.id }}</p>
+                <p><strong>Service:</strong> {{ service.service_name }}</p>
+                <p><strong>Description:</strong> {{ service.service_description }}</p>
+                <p><strong>Price:</strong> {{ service.price }}</p>
+                <div class="action-buttons">
+                    <a href="{% url 'update_service' service.id %}">
+                        <button style="padding: 10px 15px; font-size: 14px; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px; background-color: #4CAF50; color: white; transition: background-color 0.3s ease;" 
+                                onmouseover="this.style.backgroundColor='#45a049'" 
+                                onmouseout="this.style.backgroundColor='#4CAF50'">
+                            Update
+                        </button>
+                    </a>
+                </div>
+                <form id="delete-form-{{ service.id }}" action="{% url 'delete_service' service.id %}" method="POST" >
+                        {% csrf_token %}
+                        <button type="button" 
+                                style="padding: 10px 15px; font-size: 14px; border: none; border-radius: 5px; cursor: pointer; background-color: #f44336; color: white; transition: background-color 0.3s ease;" 
+                                onmouseover="this.style.backgroundColor='#d32f2f'" 
+                                onmouseout="this.style.backgroundColor='#f44336'" 
+                                onclick="confirmDelete({{ service.id }})">
+                            Delete
+                        </button>
+                    </form>
+            </div>
+        {% empty %}
+            <p class="empty-message">No services found.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Booking System</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/admin_page.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Hotel Booking System</h1>
+        <p>Select an action to manage hotel data:</p>
+        
+        <div class="action-links">
+            <h2>Add New Entries</h2>
+            <a href="{% url 'add_customer' %}">Add Customer</a>
+            <a href="{% url 'add_booking' %}">Add Booking</a>
+            <a href="{% url 'add_room' %}">Add Room</a>
+            <a href="{% url 'add_room_type' %}">Add Room Type</a>
+            <a href="{% url 'add_service' %}">Add Service</a>
+        </div>
+        
+        <div class="action-links">
+            <h2>Retrieve Entries by ID</h2>
+            <a href="{% url 'get_customer' %}">Get Customer by ID</a>
+            <a href="{% url 'get_booking' %}">Get Booking by ID</a>
+            <a href="{% url 'get_room' %}">Get Room by Number</a>
+            <a href="{% url 'get_room_type' %}">Get Room Type by ID</a>
+            <a href="{% url 'get_service' %}">Get Service by ID</a>
+        </div>
+        
+        <div class="action-links">
+            <h2>List All Entries</h2>
+            <a href="{% url 'list_customers' %}">List All Customers</a>
+            <a href="{% url 'list_bookings' %}">List All Bookings</a>
+            <a href="{% url 'list_rooms' %}">List All Rooms</a>
+            <a href="{% url 'list_room_types' %}">List All Room Types</a>
+            <a href="{% url 'list_services' %}">List All Services</a>
+        </div>
+    </div>
+</body>
+</html>

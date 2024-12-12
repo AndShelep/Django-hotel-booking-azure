@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard v1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            margin: 20px 0;
+            color: #0099cc;
+        }
+
+        .graph-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .graph {
+            width: 80%;
+            margin: 15px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 15px 0;
+            margin-bottom: 0px;
+            width: 80%;
+            text-align: center;
+        }
+
+        label {
+            margin: 10px;
+            font-size: 14px;
+            color: #0099cc;
+        }
+
+        select {
+            padding: 8px;
+            margin: 10px;
+            font-size: 14px;
+            border: 1px solid #0099cc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #0099cc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0077b3;
+        }
+
+        .graph-container h2 {
+            color: #0099cc;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Plotly Dashboard</h1>
+    </header>
+
+    <main>
+        <div class="graph-container">
+            {% block graph %}
+                {% if graph1 %}
+                    <div class="graph">
+                        {{ graph1|safe }}
+                    </div>
+                {% endif %}
+
+                {% if graph2 %}
+                    <div class="graph">
+                        {{ graph2|safe }}
+                    </div>
+                {% endif %}
+                
+                <form method="get" action="{% url 'dashboard_v1' %}">
+                    <label for="start_month">Start Month:</label>
+                    <select id="start_month" name="start_month">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11" selected>November</option>
+                        <option value="12">December</option>
+                    </select>
+        
+                    <label for="start_year">Start Year:</label>
+                    <select id="start_year" name="start_year">
+                        <option value="2024" selected>2024</option>
+                        <option value="2025">2025</option>
+                    </select>
+        
+                    <label for="end_month">End Month:</label>
+                    <select id="end_month" name="end_month">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11" selected>November</option>
+                        <option value="12">December</option>
+                    </select>
+        
+                    <label for="end_year">End Year:</label>
+                    <select id="end_year" name="end_year">
+                        <option value="2024" selected>2024</option>
+                        <option value="2025">2025</option>
+                    </select>
+        
+                    <button type="submit">Update Graph</button>
+                </form>
+                {% if graph3 %}
+                    <div class="graph">
+                        {{ graph3|safe }}
+                    </div>
+                {% endif %}
+                
+                {% if graph4 %}
+                    <div class="graph">
+                        {{ graph4|safe }}
+                    </div>
+                {% endif %}
+                
+                {% if graph5 %}
+                    <div class="graph">
+                        {{ graph5|safe }}
+                    </div>
+                {% endif %}
+                
+                {% if graph6 %}
+                    <div class="graph">
+                        {{ graph6|safe }}
+                    </div>
+                {% endif %}
+            {% endblock %}
+        </div>
+    </main>
+</body>
+</html>

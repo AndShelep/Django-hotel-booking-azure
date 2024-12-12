@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Payment</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/get_form.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% if error_message %}
+            <div style="color: red;">
+                <strong>{{ error_message }}</strong>
+            </div>
+        {% endif %}
+        <h1>Enter Payment ID</h1>
+        <form name="id" method="post" action="{% url 'get_payment' %}">
+            {% csrf_token %}
+            <label for="tid"></label>
+            <input type="number" name="tid" id="tid" required>
+            <input type="submit" value="Find Payment">
+        </form>
+
+        {% if payment %}
+            <div class="result">
+                <h2>Payment Details</h2>
+                <p><strong>ID:</strong> {{ payment.id }}</p>
+                <p><strong>Booking ID:</strong> {{ payment.booking.id }}</p>
+                <p><strong>Datetime:</strong> {{ payment.payment_date }}</p>
+                <p><strong>Amount:</strong> {{ payment.total_price }}</p>
+                <p><strong>Status:</strong> {{ payment.payment_status }}</p>
+            </div>
+        {% else %}
+            <p class="empty-message">No payment found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

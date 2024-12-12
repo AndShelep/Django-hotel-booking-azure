@@ -1,0 +1,79 @@
+/* Загальні стилі для сторінки */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Загальні стилі для кнопок */
+.button {
+    display: inline-block;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+/* Стиль для кнопки Register */
+.register-button {
+    background-color: #007bff; /* Блакитний */
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+}
+
+.register-button:hover {
+    background-color: #0056b3; /* Темніший блакитний */
+    box-shadow: 0 6px 10px rgba(0, 123, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.register-button:active {
+    background-color: #003f7f;
+    transform: translateY(0);
+}
+
+/* Стиль для кнопки Login */
+.login-button {
+    background-color: transparent; /* Прозорий фон */
+    color: #007bff; /* Блакитний текст */
+    border: 2px solid #007bff; /* Блакитний контур */
+}
+
+.login-button:hover {
+    background-color: #f0f8ff; /* Легкий блакитний відтінок */
+    color: #0056b3;
+    border-color: #0056b3; /* Темніший контур */
+}
+
+.login-button:active {
+    background-color: #e0f0ff; /* Насичений відтінок при натисканні */
+    color: #003f7f;
+    border-color: #003f7f;
+}

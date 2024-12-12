@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking List</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'styles/list_form.css' %}">
+    <script>
+        function confirmDelete(bookingID) {
+            if (confirm("Are you sure you want to delete this booking?")) {
+                document.getElementById(`delete-form-${bookingID}`).submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Booking List</h1>
+        
+        {% for booking in bookings %}
+            <div class="list-item">
+                <h2>Booking ID: {{ booking.id }}</h2>
+                
+                <p><strong>Room:</strong></p>
+                <ul>
+                    <li><p><strong>Number:</strong> {{ booking.room.room_number }}</p></li>
+                    <li><p><strong>Type:</strong> {{ booking.room.room_type.room_type }}</p></li>
+                    <li><p><strong>Description:</strong> {{ booking.room.room_type.room_type_description }}</p></li>
+                </ul>
+                
+                <p><strong>Customer:</strong></p>
+                <ul>
+                    <li><p><strong>Name:</strong> {{ booking.customer.customer_name }}</p></li>
+                    <li><p><strong>Surname:</strong> {{ booking.customer.customer_surname }}</p></li>
+                    <li><p><strong>Phone Number:</strong> {{ booking.customer.phone_number }}</p></li>
+                    <li><p><strong>Email:</strong> {{ booking.customer.customer_email }}</p></li>
+                </ul>
+                
+                <p><strong>Date:</strong></p>
+                <ul>
+                    <li><p><strong>In date:</strong> {{ booking.in_date }}</p></li>
+                    <li><p><strong>Out date:</strong> {{ booking.out_date }}</p></li>
+                </ul>
+                
+                <p class="total-price">Total price: {{ booking.total_price }}</p>
+                
+                <p><strong>Services:</strong></p>
+                <ul>
+                    {% for service in booking.services %}
+                        <li><p><strong>Name:</strong> {{ service.service_name }}</p></li>
+                        <li><p><strong>Description:</strong> {{ service.service_description }}</p></li>
+                        <li><p><strong>Price:</strong> {{ service.price }}</p></li>
+                    {% empty %}
+                        <li>No services booked</li>
+                    {% endfor %}
+                </ul>
+                
+                <p class="status">Status: {{ booking.booking_status }}</p>
+                <form id="delete-form-{{ booking.id }}" action="{% url 'delete_booking' booking.id %}" method="POST" >
+                        {% csrf_token %}
+                        <button type="button" 
+                                style="padding: 10px 15px; font-size: 14px; border: none; border-radius: 5px; cursor: pointer; background-color: #f44336; color: white; transition: background-color 0.3s ease;" 
+                                onmouseover="this.style.backgroundColor='#d32f2f'" 
+                                onmouseout="this.style.backgroundColor='#f44336'" 
+                                onclick="confirmDelete({{ booking.id }})">
+                            Delete
+                        </button>
+                    </form>
+            </div>
+        {% empty %}
+            <p class="empty-message">No bookings found.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

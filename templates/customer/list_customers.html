@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/list_form.css' %}">
+    <script>
+        function confirmDelete(customerId) {
+            if (confirm("Are you sure you want to delete this customer?")) {
+                document.getElementById(`delete-form-${customerId}`).submit();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Customer List</h1>
+
+        {% for customer in customers %}
+            <div class="list-item">
+                <p><strong>ID:</strong> {{ customer.id }}</p>
+                <p><strong>Name:</strong> {{ customer.customer_name }}</p>
+                <p><strong>Surname:</strong> {{ customer.customer_surname }}</p>
+                <p><strong>Phone Number:</strong> {{ customer.phone_number }}</p>
+                <p><strong>Email:</strong> {{ customer.customer_email }}</p>
+                
+                <div class="action-buttons">
+                    <a href="{% url 'update_customer' customer.id %}">
+                        <button style="padding: 10px 15px; font-size: 14px; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px; background-color: #4CAF50; color: white; transition: background-color 0.3s ease;" 
+                                onmouseover="this.style.backgroundColor='#45a049'" 
+                                onmouseout="this.style.backgroundColor='#4CAF50'">
+                            Update
+                        </button>
+                    </a>
+                    <form id="delete-form-{{ customer.id }}" action="{% url 'delete_customer' customer.id %}" method="POST" >
+                        {% csrf_token %}
+                        <button type="button" 
+                                style="padding: 10px 15px; font-size: 14px; border: none; border-radius: 5px; cursor: pointer; background-color: #f44336; color: white; transition: background-color 0.3s ease;" 
+                                onmouseover="this.style.backgroundColor='#d32f2f'" 
+                                onmouseout="this.style.backgroundColor='#f44336'" 
+                                onclick="confirmDelete({{ customer.id }})">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        {% empty %}
+            <p class="empty-message">No customers found.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

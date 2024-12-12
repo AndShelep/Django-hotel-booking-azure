@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room Type List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/list_form.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Room Type List</h1>
+
+        {% for room_type in room_types %}
+            <div class="list-item">
+                <p><strong>ID:</strong> {{ room_type.id }}</p>
+                <p><strong>Room type:</strong> {{ room_type.room_type }}</p>
+                <p><strong>Number of beds:</strong> {{ room_type.number_of_beds }}</p>
+                <p><strong>Description:</strong> {{ room_type.room_type_description }}</p>
+            </div>
+        {% empty %}
+            <p class="empty-message">No room types found.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

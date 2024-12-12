@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Room Type</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/add_form.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add Room Type</h1>
+        <form name="register" method="post" action="{% url 'add_room_type' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Room Type:</label>
+                <input type="text" name="troom_type" required>
+            </div>
+            <div class="form-group">
+                <label>Number of Beds:</label>
+                <input type="text" name="tnumber_of_beds" required>
+            </div>
+            <div class="form-group">
+                <label>Room Type Description:</label>
+                <input type="text" name="tdescription" required>
+            </div>
+            <button type="submit" class="submit-button">Click to Register</button>
+        </form>
+    </div>
+</body>
+</html>

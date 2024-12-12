@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Customer ID</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles/get_form.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Customer ID</h1>
+        <form name="id" method="post" action="{% url 'get_customer' %}">
+            {% csrf_token %}
+            <label for="tid"></label>
+            <input type="number" name="tid" id="tid" required>
+            <input type="submit" value="Find Customer">
+        </form>
+
+        {% if customer %}
+            <div class="result">
+                <h2>Customer Details</h2>
+                <p><strong>ID:</strong> {{ customer.id }}</p>
+                <p><strong>Name:</strong> {{ customer.customer_name }}</p>
+                <p><strong>Surname:</strong> {{ customer.customer_surname }}</p>
+                <p><strong>Phone Number:</strong> {{ customer.phone_number }}</p>
+                <p><strong>Email:</strong> {{ customer.customer_email }}</p>
+            </div>
+        {% else %}
+            <p class="empty-message">No customer found with the given ID.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
