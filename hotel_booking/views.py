@@ -227,7 +227,7 @@ def add_booking(request):
         bookings = Booking.objects.filter(room=room)
         if bookings:
             for book in bookings:
-                if book.in_date < in_date and book.out_date > in_date or book.in_date > out_date and out_date < book.out_date:
+                if book.out_date > in_date and book.in_date < out_date:
                     rooms = hotelBookingManager.room_repository.get_all()
                     services = hotelBookingManager.service_repository.get_all()
                     return render(
