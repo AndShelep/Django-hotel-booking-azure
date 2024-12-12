@@ -29,7 +29,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "hotel_booking_py",
         'HOST': "hotelbooking-server.mysql.database.azure.com",
-        'USER': "rootShelep",
+        'USER': "rootShelep@hotelbooking-server",
         'PASSWORD': "pass@1324",
     }
 }
