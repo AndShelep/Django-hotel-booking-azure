@@ -21,16 +21,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "hotel_booking_py",
         'HOST': "hotelbooking-server.mysql.database.azure.com",
-        'USER': "rootShelep@hotelbooking-server",
-        'PASSWORD': "pass@1324",
+        'USER': "rootShelep",
+        'PASSWORD': "shelep!1234",
         'PORT': '3306',
     }
 }
