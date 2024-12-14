@@ -2,28 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Rooms</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            padding: 0;
             color: #333;
         }
 
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-sizing: border-box;
+            width: 100%; /* Хедер займає всю ширину */
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #0056b3;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        .header a:hover {
+            background-color: #003f7f;
+        }
+
         .container {
-            width: 100%;
+            margin-top: 80px; /* Відступ, щоб контент не заходив під хедер */
             max-width: 600px;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         h1 {
@@ -51,7 +80,6 @@
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            margin-bottom: 15px;
         }
 
         input[type="submit"] {
@@ -97,6 +125,10 @@
     </style>
 </head>
 <body>
+    <header class="header">
+        <div>Squirrel Hotel</div>
+        <a href="{% url 'home' %}">Home</a>
+    </header>
     <div class="container">
         <h1>Find Available Rooms</h1>
         <form name="availability" method="post" action="{% url 'available_rooms' %}">

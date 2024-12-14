@@ -3,10 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <title>Hotel Booking System</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'styles/admin_page.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        .header {
+            background-color: #007bff; 
+            color: #fff; 
+            padding: 10px 20px;
+            text-align: left;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            position: sticky;
+            top: 0;
+            z-index: 1000; 
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #007bff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .action-links {
+            margin-bottom: 30px;
+        }
+
+        .action-links h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #007bff;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .action-links a {
+            display: block;
+            margin: 5px 0;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            transition: background-color 0.3s, border 0.3s;
+        }
+
+        .action-links a:hover {
+            background-color: #e7f1ff;
+            border-color: #007bff;
+        }
+    </style>
 </head>
 <body>
+    <header class="header">
+        Squirrel Hotel
+    </header>
     <div class="container">
         <h1>Welcome to the Hotel Booking System</h1>
         <p>Select an action to manage hotel data:</p>
@@ -23,12 +99,8 @@
         
         <div class="action-links">
             <h2>Get</h2>
-            <a href="{% url 'get_customer' %}">Get Customer by ID</a>
             <a href="{% url 'get_booking' %}">Get Booking by ID</a>
             <a href="{% url 'get_room' %}">Get Room by Number</a>
-            <a href="{% url 'get_room_type' %}">Get Room Type by ID</a>
-            <a href="{% url 'get_service' %}">Get Service by ID</a>
-            <a href="{% url 'get_payment' %}">Get Payment by ID</a>
             <a href="{% url 'available_rooms' %}">Get available rooms</a>
         </div>
         

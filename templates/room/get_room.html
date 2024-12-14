@@ -3,10 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <title>Get Room</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'styles/get_form.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-sizing: border-box;
+            width: 100%; /* Хедер займає всю ширину */
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            background-color: #0056b3;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        .header a:hover {
+            background-color: #003f7f;
+        }
+
+        .container {
+            margin-top: 80px;
+            width: 100%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        h1 {
+            font-size: 24px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        label {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            max-width: 200px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        
+        .result {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        
+        .result p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        
+        .result strong {
+            color: #333;
+        }
+        
+        .empty-message {
+            color: #999;
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .room-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
+    <header class="header">
+        <div>Squirrel Hotel</div>
+        <a href="{% url 'home' %}">Home</a>
+    </header>
     <div class="container">
         <h1>Enter Room Number</h1>
         <form name="id" method="post" action="{% url 'get_room' %}">
