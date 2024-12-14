@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Available Rooms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+        }
+
+        input[type="date"], input[type="submit"] {
+            width: 100%;
+            max-width: 200px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        input[type="submit"] {
+            color: #fff;
+            background-color: #007bff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .room-card {
+            margin-bottom: 20px;
+        }
+
+        .room-card p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .room-card strong {
+            color: #333;
+        }
+
+        .empty-message {
+            color: #999;
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Find Available Rooms</h1>
+        <form name="availability" method="post" action="{% url 'available_rooms' %}">
+            {% csrf_token %}
+            <label for="in_date">Check-in Date:</label>
+            <input type="date" name="in_date" id="in_date" required>
+            <label for="out_date">Check-out Date:</label>
+            <input type="date" name="out_date" id="out_date" required>
+            <input type="submit" value="Find Rooms">
+        </form>
+
+        {% if rooms %}
+            <div class="result">
+                <h2>Available Rooms</h2>
+                {% for room in rooms %}
+                    <div class="room-card">
+                        <p><strong>Room Number:</strong> {{ room.room_number }}</p>
+                        <p><strong>Type:</strong> {{ room.room_type.room_type }}</p>
+                        <p><strong>Description:</strong> {{ room.room_type.room_type_description }}</p>
+                        <p><strong>Price per night:</strong> {{ room.price_per_night }}</p>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty-message">No rooms are available for the selected dates.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
