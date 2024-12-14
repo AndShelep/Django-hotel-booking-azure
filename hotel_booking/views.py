@@ -184,6 +184,27 @@ def get_room(request):
 
     return render(request, "room/get_room.html", {"room": room, "error_message": error_message})
 
+
+def available_rooms(request):
+    rooms = None
+    if request.method == "POST":
+        in_date = request.POST.get("in_date")
+        out_date = request.POST.get("out_date")
+        if in_date and out_date:
+            in_date = datetime.strptime(in_date, '%Y-%m-%d').date()
+            out_date = datetime.strptime(out_date, '%Y-%m-%d').date()
+
+            all_rooms = hotelBookingManager.room_repository.get_all()
+
+            booked_rooms = hotelBookingManager.booking_repository.get_all().filter(
+                in_date__lt=out_date,  # Початок бронювання до дати виїзду
+                out_date__gt=in_date  # Кінець бронювання після дати заїзду
+            ).values_list('room__room_number', flat=True)
+
+            rooms = all_rooms.exclude(room_number__in=booked_rooms)
+
+    return render(request, "room/available_rooms.html", {"rooms": rooms})
+
 def update_room(request, id):
     room = hotelBookingManager.room_repository.get_by_id(id)
     room_types = hotelBookingManager.room_type_repository.get_all()

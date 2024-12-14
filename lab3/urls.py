@@ -27,6 +27,7 @@ urlpatterns = [
     path('room_types/add/', views.add_room_type, name='add_room_type'),
     path('room_types/get', views.get_room_type, name='get_room_type'),
     path('room_types/', views.list_room_types, name='list_room_types'),
+    path('available_rooms/', views.available_rooms, name='available_rooms'),
 
     path('add_service/', views.add_service, name='add_service'),
     path('list_services/', views.list_services, name='list_services'),
