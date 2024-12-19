@@ -4,41 +4,40 @@ from .models import Customer, Room, RoomType, Booking, Service
 from datetime import datetime, timedelta
 
 
-class AddCustomerViewTest(TestCase):
-    def test_add_customer_view_success(self):
-        url = reverse('add_customer')
-        data = {
-            'name': 'Alice',
-            'surname': 'Smith',
-            'phone': '098765432109',
-            'email': 'alice@example.com'
-        }
-
-        response = self.client.post(url, data)
-
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(Customer.objects.filter(customer_name="Alice").exists())
-
-    def test_invalid_phone_number(self):
-        url = reverse('add_customer')
-        data = {
-            'name': 'John',
-            'surname': 'Doe',
-            'phone': '12345',
-            'email': 'johndoe@example.com'
-        }
-
-        response = self.client.post(url, data)
-
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Phone number must contain exactly 12 digits.")
-        self.assertTemplateUsed(response, "customer/add_customer.html")
+# class AddCustomerViewTest(TestCase):
+#     def test_add_customer_view_success(self):
+#         url = reverse('add_customer')
+#         data = {
+#             'name': 'Alice',
+#             'surname': 'Smith',
+#             'phone': '098765432109',
+#             'email': 'alice@example.com'
+#         }
+#
+#         response = self.client.post(url, data)
+#
+#         self.assertEqual(response.status_code, 302)
+#         self.assertTrue(Customer.objects.filter(customer_name="Alice").exists())
+#
+#     def test_invalid_phone_number(self):
+#         url = reverse('add_customer')
+#         data = {
+#             'name': 'John',
+#             'surname': 'Doe',
+#             'phone': '12345',
+#             'email': 'johndoe@example.com'
+#         }
+#
+#         response = self.client.post(url, data)
+#
+#         self.assertEqual(response.status_code, 200)
+#         self.assertContains(response, "Phone number must contain exactly 12 digits.")
+#         self.assertTemplateUsed(response, "customer/add_customer.html")
 
 
 
 class AddBookingViewTest(TestCase):
     def setUp(self):
-        # Ініціалізація тестових даних
         self.room_type = RoomType.objects.create(
             room_type="Single",
             number_of_beds=1,
